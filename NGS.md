@@ -7,6 +7,11 @@ ls Fly/Data/* | while read id; do fastq-dump --gzip --split-3 -O Fly/Data/ ${id}
 rm Fly/Data/*.sra
 conda deactivate
 ```
+### FastQC and multiQC of raw data
+```bash
+
+```
+
 ### Build Index
 ```bash
 hisat2-build Fly/Drosophila.fa Fly/Hisat2_fly/fly
