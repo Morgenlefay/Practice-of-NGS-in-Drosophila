@@ -9,8 +9,10 @@ conda deactivate
 ```
 ### FastQC and multiQC of raw data
 ```bash
+conda activate QC
 ls Fly/Data/*fastq.gz |  while read id; do fastqc -f fastq -o Fly/FastQC_1/./ ${id} & done
 multiqc Fly/FastQC_1 -o Fly/FastQC_1
+conda deactivate
 ```
 
 ### Build Index
