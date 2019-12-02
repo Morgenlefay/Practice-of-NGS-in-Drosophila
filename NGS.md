@@ -9,10 +9,7 @@ conda deactivate
 ```
 ### FastQC and multiQC of raw data
 ```bash
-fastqc=/home/morgenlefay/miniconda2/pkgs/fastqc-0.11.8-1/bin/fastqc
-ls Fly/Data/*fastq.gz |  while read id; do 
-$fastqc -f fastq -o Fly/FastQC_1/./ ${id} &
-done
+ls Fly/Data/*fastq.gz |  while read id; do fastqc -f fastq -o Fly/FastQC_1/./ ${id} & done
 multiqc Fly/FastQC_1 -o Fly/FastQC_1
 ```
 
