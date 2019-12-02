@@ -1,3 +1,7 @@
+# Practice of NGS in _Drosophila_
+Global changes of H3K27me3 domains and Polycomb group protein distribution in the absence of recruiters Spps or Pho
+(https://www.ncbi.nlm.nih.gov/pubmed/29432187)
+## Preprocess
 ### Raw data download
 ```bash
 conda activate Download
