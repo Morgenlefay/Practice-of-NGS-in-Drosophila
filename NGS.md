@@ -164,10 +164,18 @@ library(stringr)
 ac=data.frame(group=str_split(colnames(Data),'_',simplify = T)[,1])
 rownames(ac)=colnames(Data)
 pheatmap::pheatmap(cor(log(Data+1)),annotation_col = ac)
+cg=Data[,colnames(Data)[grepl('_1',colnames(Data))]]
+library(ggpubr)
+pairs(log(cg+1))
 ```
-
-
-
+##### deepTools
+```bash
+multiBigwigSummary bins -p 8 -b Fly/RNA_seq/*.bw -o results.npz
+plotCorrelation -in results.npz --corMethod spearman --skipZeros \
+                                --whatToPlot heatmap --colorMap RdYlBu \
+                                --plotNumbers \
+                        -o heatmap.eps
+```
 
 
 ## ChIP-Seq
