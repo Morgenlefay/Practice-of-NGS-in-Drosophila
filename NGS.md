@@ -114,6 +114,9 @@ bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907467.fastq.gz | samtool
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907468.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Input_PhoKO_2.bam
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR9967698.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Input_PhoKO_2.bam
 ```
+#### Deduplicates
+```bash
 
+```
 
 
