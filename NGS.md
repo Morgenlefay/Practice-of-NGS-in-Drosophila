@@ -18,11 +18,13 @@ ls Fly/Data/*fastq.gz |  while read id; do fastqc -f fastq -o Fly/FastQC_1/./ ${
 multiqc Fly/FastQC_1 -o Fly/FastQC_1
 conda deactivate
 ```
-
 ### Build Index
 ```bash
 hisat2-build Fly/Drosophila.fa Fly/Hisat2_fly/fly
 bowtie2-build Fly/Drosophila.fa Fly/Bowtie2_fly/fly
 ```
+## RNA-Seq
 
 
+
+## ChIP-Seq
