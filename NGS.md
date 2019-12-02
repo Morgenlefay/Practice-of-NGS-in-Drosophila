@@ -49,6 +49,19 @@ featureCounts -T 8 -p -t exon -g gene_name -a Fly/Drosophila.gtf -o SppsKO_4.txt
 featureCounts -T 8 -p -t exon -g gene_name -a Fly/Drosophila.gtf -o WT_1.txt Fly/RNA_seq/WT_1.bam
 featureCounts -T 8 -p -t exon -g gene_name -a Fly/Drosophila.gtf -o WT_2.txt Fly/RNA_seq/WT_2.bam
 featureCounts -T 8 -p -t exon -g gene_name -a Fly/Drosophila.gtf -o WT_3.txt Fly/RNA_seq/WT_3.bam
+cut -f 1,7 PhoKO_1.txt |grep -v '^#' >Fly/Count/PhoKO_1.txt
+cut -f 1,7 PhoKO_2.txt |grep -v '^#' >Fly/Count/PhoKO_2.txt
+cut -f 1,7 PhoKO_3.txt |grep -v '^#' >Fly/Count/PhoKO_3.txt
+cut -f 1,7 SppsKO_1.txt |grep -v '^#' >Fly/Count/SppsKO_1.txt
+cut -f 1,7 SppsKO_2.txt |grep -v '^#' >Fly/Count/SppsKO_2.txt
+cut -f 1,7 SppsKO_3.txt |grep -v '^#' >Fly/Count/SppsKO_3.txt
+cut -f 1,7 SppsKO_4.txt |grep -v '^#' >Fly/Count/SppsKO_4.txt
+cut -f 1,7 WT_1.txt |grep -v '^#' >Fly/Count/WT_1.txt
+cut -f 1,7 WT_2.txt |grep -v '^#' >Fly/Count/WT_2.txt
+cut -f 1,7 WT_3.txt |grep -v '^#' >Fly/Count/WT_3.txt
+paste Fly/Count/WT_1.txt Fly/Count/WT_2.txt Fly/Count/WT_3.txt Fly/Count/PhoKO_1.txt Fly/Count/PhoKO_2.txt Fly/Count/PhoKO_3.txt | awk '{printf $1"\t";for(i=2;i<=NF;i=i+2)printf $i"\t";print $i}' > PhoKO.txt
+paste Fly/Count/WT_1.txt Fly/Count/WT_2.txt Fly/Count/WT_3.txt Fly/Count/SppsKO_1.txt Fly/Count/SppsKO_2.txt Fly/Count/SppsKO_3.txt Fly/Count/SppsKO_4.txt | awk '{printf $1"\t";for(i=2;i<=NF;i=i+2)printf $i"\t";print $i}' > SppsKO.txt
+paste Fly/Count/WT_1.txt Fly/Count/WT_2.txt Fly/Count/WT_3.txt Fly/Count/SppsKO_1.txt Fly/Count/SppsKO_2.txt Fly/Count/SppsKO_3.txt Fly/Count/SppsKO_4.txt Fly/Count/PhoKO_1.txt Fly/Count/PhoKO_2.txt Fly/Count/PhoKO_3.txt | awk '{printf $1"\t";for(i=2;i<=NF;i=i+2)printf $i"\t";print $i}' > Matrix.txt
 ```
 
 ## ChIP-Seq
