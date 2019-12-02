@@ -151,6 +151,25 @@ as.data.frame(up) -> up_gene
 write.csv(up_gene, file="SppsKO_Up.csv",row.names = T)
 write.csv(down_gene, file="SppsKO_Down.csv",row.names = T)
 ```
+#### Correlation
+```r
+###--------------------------
+rm(list=ls())
+options(stringsAsFactors = F)
+library(pheatmap)
+Data <- read.table("Matrix.txt", header=TRUE)
+row.names(Data) <- Data$Geneid
+Data <- Data[ ,-1]
+library(stringr)
+ac=data.frame(group=str_split(colnames(Data),'_',simplify = T)[,1])
+rownames(ac)=colnames(Data)
+pheatmap::pheatmap(cor(log(Data+1)),annotation_col = ac)
+```
+
+
+
+
+
 ## ChIP-Seq
 #### Bowtie2
 ```bash
