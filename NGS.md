@@ -152,6 +152,7 @@ write.csv(up_gene, file="SppsKO_Up.csv",row.names = T)
 write.csv(down_gene, file="SppsKO_Down.csv",row.names = T)
 ```
 #### Correlation
+##### Expression
 ```r
 ###--------------------------
 rm(list=ls())
@@ -168,13 +169,30 @@ cg=Data[,colnames(Data)[grepl('_1',colnames(Data))]]
 library(ggpubr)
 pairs(log(cg+1))
 ```
-##### deepTools
-```bash
-multiBigwigSummary bins -p 8 -b Fly/RNA_seq/*.bw -o results.npz
-plotCorrelation -in results.npz --corMethod spearman --skipZeros \
-                                --whatToPlot heatmap --colorMap RdYlBu \
-                                --plotNumbers \
-                        -o heatmap.eps
+##### log2FC
+```r
+###--------------------------
+rm(list=ls())
+options(stringsAsFactors = F)
+library(ggpubr)
+library(plyr)
+PhoKO_DEG <- read.csv("PhoKO_DEG.csv",header = TRUE)
+SppsKO_DEG <-read.csv("SppsKO_DEG.csv",header = TRUE)
+PhoKO_DEG <- PhoKO_DEG[,1:3]
+SppsKO_DEG <- SppsKO_DEG[,1:3]
+PhoKO_DEG <- PhoKO_DEG[,-2]
+SppsKO_DEG <- SppsKO_DEG[,-2]
+PhoKO_DEG <- PhoKO_DEG[order(PhoKO_DEG[,1]),]
+SppsKO_DEG <- SppsKO_DEG[order(SppsKO_DEG[,1]),]
+df=data.frame(SppsKO=SppsKO_DEG$log2FoldChange,
+              PhoKO=PhoKO_DEG$log2FoldChange)
+sp <- ggscatter(df, "SppsKO","PhoKO",
+                add = "reg.line",  # Add regressin line
+                add.params = list(color = "blue", fill = "lightgray"), # Customize reg. line
+                conf.int = TRUE # Add confidence interval
+                )
+# Add correlation coefficient
+sp + stat_cor(method = "pearson", label.x = 3, label.y = 30)
 ```
 #### Expression
 ```r
