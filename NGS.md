@@ -96,6 +96,23 @@ with(res[topGene, ], {
   text(baseMean, log2FoldChange, topGene, pos=2, col="dodgerblue")
 })
 
+### shrinkage estimators
+resNorm <- lfcShrink(dds, coef=2, type="normal")
+par(mfrow=c(1,1))
+xlim <- c(1,1e5); ylim <- c(-3,3)
+plotMA(resNorm, xlim=xlim, ylim=ylim, main="normal")
+
+### 表达矩阵Normalization
+rld <- rlogTransformation(dds)
+exprSet=assay(rld)
+par(cex = 0.7)
+n.sample=ncol(exprSet)
+if(n.sample>40) par(cex = 0.5)
+cols <- rainbow(n.sample*1.2)
+par(mfrow=c(2,2))
+boxplot(exprSet, col = cols,main="expression value",las=2)
+hist(exprSet)
+
 ###提取差异分析结果
 res <- res[order(res$padj),]
 diff_gene_deseq2 <-subset(res,padj < 0.05)
@@ -121,7 +138,7 @@ library(DESeq2)
 Mydata <- read.table("SppsKO.txt", header=TRUE)
 row.names(Mydata) <- Mydata$Geneid
 CountData <- Mydata[ ,-1]
-condition <- factor(c("WT","WT","WT","SppsKO","SppsKO","SppsKO","SppsKO"))
+condition <- factor(c("WT","WT","WT","PhoKO","PhoKO","PhoKO","SppsKO"))
 colData <- data.frame(row.names=colnames(CountData), condition)
 
 ###DEseq标准化dds
@@ -136,6 +153,23 @@ with(res[topGene, ], {
   points(baseMean, log2FoldChange, col="dodgerblue", cex=2, lwd=2)
   text(baseMean, log2FoldChange, topGene, pos=2, col="dodgerblue")
 })
+
+### shrinkage estimators
+resNorm <- lfcShrink(dds, coef=2, type="normal")
+par(mfrow=c(1,1))
+xlim <- c(1,1e5); ylim <- c(-3,3)
+plotMA(resNorm, xlim=xlim, ylim=ylim, main="normal")
+
+### 表达矩阵Normalization
+rld <- rlogTransformation(dds)
+exprSet=assay(rld)
+par(cex = 0.7)
+n.sample=ncol(exprSet)
+if(n.sample>40) par(cex = 0.5)
+cols <- rainbow(n.sample*1.2)
+par(mfrow=c(2,2))
+boxplot(exprSet, col = cols,main="expression value",las=2)
+hist(exprSet)
 
 ###提取差异分析结果
 res <- res[order(res$padj),]
