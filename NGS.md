@@ -176,7 +176,96 @@ plotCorrelation -in results.npz --corMethod spearman --skipZeros \
                                 --plotNumbers \
                         -o heatmap.eps
 ```
+#### Expression
+```r
+###--------------------------
+rm(list = ls())
+options(stringsAsFactors = F)
+library(ggpubr)
+library(stringr)
+library(ggplot2)
+library(cowplot)
+library(RColorBrewer)
+Data <- read.table("Matrix.txt", header=TRUE)
+## 定义Barplot主题
+my_bar_theme <- theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 16), 
+                      # 因为 x 轴标签要旋转 90°
+                      axis.text.y = element_text(size = 16),
+                      axis.title.y = element_text(size = 18,
+                                                  face = "bold",),
+                      legend.position = "none") +
+  theme(plot.title = element_text(size = 20, face = "bold", hjust = 0.5)) # 基因名居中
 
+
+## 提取 `Pho` 基因对应的行以及表达量信息
+cg <- Data[Data[,1] == 'pho',2:11]
+dat <- data.frame(gene = as.numeric(cg),
+                  sample = str_split(names(cg),'\\.',simplify = T)[,1],
+                  group = str_split(names(cg),'_',simplify = T)[,1]
+)
+labels = c(paste0("WT", "_",1:3), paste0("SppsKO", "_", 1:4), paste0("PhoKO", "_", 1:3))
+
+# 使用ggbarplot()函数进行绘图
+ggbarplot(dat,x = 'sample', y = 'gene', 
+          color = 'black', fill = "group", 
+          size = 1) +
+  # 使用 Takecolor 软件进行对准样图取色
+  scale_fill_manual(values = c(WT = "#9C4B25", 
+                               SppsKO = "#DE2C1C", 
+                               PhoKO = "#43A542")) +
+  scale_color_manual(values = "black") +
+  scale_x_discrete(limits = labels) +
+  labs(y = "Normalized read count",
+       x = "",
+       title = "Pho") +
+  my_bar_theme +
+  scale_y_continuous(expand = c(0, 0)) + 
+  geom_text(aes(y = gene * 1.1, label = "")) 
+
+## 封装画图函数
+my_barplot <- function(gene){
+  cg <- Data[Data[,1] == gene, 2:11] # 提取候选的表达量对应的行和列
+  
+  dat <- data.frame(gene = as.numeric(cg),
+                    sample = str_split(names(cg),'\\.',simplify = T)[,1], # 这里将样品后面的 bam文件后缀去掉
+                    group = str_split(names(cg),'_',simplify = T)[,1]
+  )
+  
+  # x 轴标签的顺序，这里是按照原图的顺序来的
+  labels = c(paste0("WT", "_",1:3), paste0("SppsKO", "_", 1:4), paste0("PhoKO", "_", 1:3))
+  
+  ggbarplot(dat, x = 'sample', y = 'gene', 
+            color = 'black', fill = "group", 
+            size = 1) +
+    scale_fill_manual(values = c(WT = "#9C4B25", 
+                                 SppsKO = "#DE2C1C", 
+                                 PhoKO = "#43A542")) +
+    scale_color_manual(values = "black") +
+    scale_x_discrete(limits = labels) +
+    labs(y = "Normalized read count",
+         x = "",
+         title = gene) +
+    scale_y_continuous(expand = c(0, 0)) + 
+    geom_text(aes(y = gene * 1.1, label = "")) +
+    my_bar_theme 
+}
+
+
+## 多个基因组图
+Spps <- Data[, 1][3045]
+Pho <- Data[, 1][17671]
+Spps_plot <- my_barplot("Spps")
+Pho_plot <- my_barplot("Pho")
+gene_exp_plot <- plot_grid(Pho_plot, Spps_plot, 
+                           labels = c("A", "B"))
+ggsave("gene_exp_plot.pdf", gene_exp_plot, width = 10, height = 5) 
+
+## 批量多个基因组图
+gene_list <- Data[, 1][1:10]
+test <- lapply(gene_list, my_barplot)
+gene <- plot_grid(plotlist = test, ncol = 5)
+ggsave("gene.pdf", gene, width = 20, height = 5* length(test) %/% 5)
+```
 
 ## ChIP-Seq
 #### Bowtie2
