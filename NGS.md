@@ -103,8 +103,8 @@ diff_gene_deseq2 <- row.names(diff_gene_deseq2)
 resdata <-  merge(as.data.frame(res),as.data.frame(counts(dds,normalize=TRUE)),by="row.names",sort=FALSE)
 write.csv(resdata,file= "PhoKO_DEG.csv",row.names = F)
 subset(res,padj < 0.05) -> diff
-subset(diff,log2FoldChange < 0) -> up
-subset(diff,log2FoldChange > 0) -> down
+subset(diff,log2FoldChange < 0) -> down
+subset(diff,log2FoldChange > 0) -> up
 as.data.frame(down) -> down_gene
 as.data.frame(up) -> up_gene
 write.csv(up_gene, file="PhoKO_Up.csv",row.names = T)
@@ -144,8 +144,8 @@ diff_gene_deseq2 <- row.names(diff_gene_deseq2)
 resdata <-  merge(as.data.frame(res),as.data.frame(counts(dds,normalize=TRUE)),by="row.names",sort=FALSE)
 write.csv(resdata,file= "SppsKO_DEG.csv",row.names = F)
 subset(res,padj < 0.05) -> diff
-subset(diff,log2FoldChange < 0) -> up
-subset(diff,log2FoldChange > 0) -> down
+subset(diff,log2FoldChange < 0) -> down
+subset(diff,log2FoldChange > 0) -> up
 as.data.frame(down) -> down_gene
 as.data.frame(up) -> up_gene
 write.csv(up_gene, file="SppsKO_Up.csv",row.names = T)
