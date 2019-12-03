@@ -138,7 +138,7 @@ library(DESeq2)
 Mydata <- read.table("SppsKO.txt", header=TRUE)
 row.names(Mydata) <- Mydata$Geneid
 CountData <- Mydata[ ,-1]
-condition <- factor(c("WT","WT","WT","PhoKO","PhoKO","PhoKO","SppsKO"))
+condition <- factor(c("WT","WT","WT","SppsKO","SppsKO","SppsKO","SppsKO"))
 colData <- data.frame(row.names=colnames(CountData), condition)
 
 ###DEseq标准化dds
