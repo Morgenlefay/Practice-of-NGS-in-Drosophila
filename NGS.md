@@ -368,5 +368,43 @@ bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR9967698.fastq.gz | samtool
 ```bash
 ls Fly/ChIP_seq/*.bam |  while read id; do sambamba markdup -r $id $id.dedup.bam & done
 ```
+#### Merge
+```bash
+samtools merge Fly/ChIP_seq/Merge/Ez_SppsKO.bam Fly/ChIP_seq/Ez_SppsKO_1.bam.dedup.bam  Fly/ChIP_seq/Ez_SppsKO_2.bam.dedup.bam Fly/ChIP_seq/Ez_SppsKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Ez_WT.bam Fly/ChIP_seq/Ez_WT_1.bam.dedup.bam Fly/ChIP_seq/Ez_WT_2.bam.dedup.bam Fly/ChIP_seq/Ez_WT_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/H3K27_PhoKO.bam Fly/ChIP_seq/H3K27_PhoKO_1.bam.dedup.bam Fly/ChIP_seq/H3K27_PhoKO_2.bam.dedup.bam Fly/ChIP_seq/H3K27_PhoKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/H3K27_SppsKO.bam Fly/ChIP_seq/H3K27_SppsKO_1.bam.dedup.bam Fly/ChIP_seq/H3K27_SppsKO_2.bam.dedup.bam Fly/ChIP_seq/H3K27_SppsKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Input_PhoKO.bam Fly/ChIP_seq/Input_PhoKO_1.bam.dedup.bam Fly/ChIP_seq/Input_PhoKO_2.bam.dedup.bam Fly/ChIP_seq/Input_PhoKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Input_SppsKO.bam Fly/ChIP_seq/Input_SppsKO_1.bam.dedup.bam Fly/ChIP_seq/Input_SppsKO_2.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Input_WT.bam Fly/ChIP_seq/Input_WT_1.bam.dedup.bam Fly/ChIP_seq/Input_WT_2.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Pc_WT.bam Fly/ChIP_seq/Pc_WT_1.bam.dedup.bam Fly/ChIP_seq/Pc_WT_2.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Ph_PhoKO.bam Fly/ChIP_seq/Ph_PhoKO_1.bam.dedup.bam Fly/ChIP_seq/Ph_PhoKO_2.bam.dedup.bam Fly/ChIP_seq/Ph_PhoKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Ph_SppsKO.bam Fly/ChIP_seq/Ph_SppsKO_1.bam.dedup.bam Fly/ChIP_seq/Ph_SppsKO_2.bam.dedup.bam Fly/ChIP_seq/Ph_SppsKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Ph_WT.bam Fly/ChIP_seq/Ph_WT_1.bam.dedup.bam Fly/ChIP_seq/Ph_WT_2.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Pho_SppsKO.bam Fly/ChIP_seq/Pho_SppsKO_1.bam.dedup.bam Fly/ChIP_seq/Pho_SppsKO_2.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Pho_WT.bam Fly/ChIP_seq/Pho_WT_1.bam.dedup.bam Fly/ChIP_seq/Pho_WT_2.bam.dedup.bam Fly/ChIP_seq/Pho_WT_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Psc_SppsKO.bam Fly/ChIP_seq/Psc_SppsKO_1.bam.dedup.bam Fly/ChIP_seq/Psc_SppsKO_2.bam.dedup.bam Fly/ChIP_seq/Psc_SppsKO_3.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Psc_WT.bam Fly/ChIP_seq/Psc_WT_1.bam.dedup.bam Fly/ChIP_seq/Psc_WT_2.bam.dedup.bam
+samtools merge Fly/ChIP_seq/Merge/Spps_WT.bam Fly/ChIP_seq/Spps_WT_1.bam.dedup.bam Fly/ChIP_seq/Spps_WT_2.bam.dedup.bam
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
