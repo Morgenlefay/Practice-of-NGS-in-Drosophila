@@ -414,7 +414,26 @@ anno_bed <- function(bedPeaksfile){peak<-readPeakFile(bedPeaksfile)
   sampleName=basename(strsplit(bedPeaksfile, '\\.')[[1]][1])
   return(peakAnno_df)
 }
-tem=lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T),anno_bed)
+tmp=lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T),anno_bed)
+
+df=lapply(tmp, function(x){
+  #table(x$annotation)
+  numb1=length(grep("Promoter", x$annotation))
+  numb2=length(grep("5' UTR", x$annotation))
+  numb3=length(grep("Exon", x$annotation))
+  numb4=length(grep("Intron", x$annotation))
+  numb5=length(grep("3' UTR", x$annotation))
+  numb6=length(grep("Intergenic", x$annotation))
+  return(c(numb1,numb2,numb3,numb4,numb5,numb6))
+})
+df=do.call(rbind,df)
+colnames(df)=c("Promoter","5' UTR","Exon","Intron","3' UTR","Intergenic")
+rownames(df)=unlist(lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T), function(x)
+  {sampleName=basename(strsplit(x, '\\.')[[1]][1])}))
+
+
+
+
 ```
 
 
