@@ -426,14 +426,14 @@ library("TxDb.Dmelanogaster.UCSC.dm3.ensGene")
 txdb <- TxDb.Dmelanogaster.UCSC.dm3.ensGene
 library("clusterProfiler")
 anno_bed <- function(bedPeaksfile){peak<-readPeakFile(bedPeaksfile)
-  #keepChr= !grepl("Het",seqlevels(peak))
-  #table(keepChr)
-  #seqlevels(peak, pruning.mode="coarse") <- seqlevels(peak)[keepChr]
-  peakAnno <- annotatePeak(peak, tssRegion=c(-3000, 3000), 
+#keepChr= !grepl("Het",seqlevels(peak))
+#table(keepChr)
+#seqlevels(peak, pruning.mode="coarse") <- seqlevels(peak)[keepChr]
+peakAnno <- annotatePeak(peak, tssRegion=c(-3000, 3000), 
                          TxDb=txdb, annoDb="org.Dm.eg.db") 
-  peakAnno_df=as.data.frame(peakAnno)
-  sampleName=basename(strsplit(bedPeaksfile, '\\.')[[1]][1])
-  return(peakAnno_df)
+peakAnno_df=as.data.frame(peakAnno)
+sampleName=basename(strsplit(bedPeaksfile, '\\.')[[1]][1])
+return(peakAnno_df)
 }
 tmp=lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T),anno_bed)
 
@@ -450,12 +450,21 @@ df=lapply(tmp, function(x){
 df=do.call(rbind,df)
 colnames(df)=c("Promoter","5' UTR","Exon","Intron","3' UTR","Intergenic")
 rownames(df)=unlist(lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T), function(x)
-  {sampleName=basename(strsplit(x, '\\.')[[1]][1])}))
+{sampleName=basename(strsplit(x, '\\.')[[1]][1])}))
 
+library(ggpubr)
+library(reshape2)
+df2=melt(apply(df,1,function(x) x/sum(x)))
+colnames(df2)=c("Location","Sample","Fraction")
 
-
-
+ggbarplot(df2, "Sample", "Fraction",
+          fill = "Location", color = "Location", palette = "lancet")
 ```
+
+
+
+
+
 
 
 
