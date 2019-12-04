@@ -396,7 +396,26 @@ macs2 callpeak -t Fly/ChIP_seq/Pho_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g
 macs2 callpeak -t Fly/ChIP_seq/Psc_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Psc_WT -q 0.01 --outdir Peak
 macs2 callpeak -t Fly/ChIP_seq/Spps_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Spps_WT -q 0.01 --outdir Peak
 ```
-
+#### Peak annotation
+```r
+rm(list=ls())
+library("ChIPseeker")
+library("org.Dm.eg.db")
+library("TxDb.Dmelanogaster.UCSC.dm3.ensGene")
+txdb <- TxDb.Dmelanogaster.UCSC.dm3.ensGene
+library("clusterProfiler")
+anno_bed <- function(bedPeaksfile){peak<-readPeakFile(bedPeaksfile)
+  #keepChr= !grepl("Het",seqlevels(peak))
+  #table(keepChr)
+  #seqlevels(peak, pruning.mode="coarse") <- seqlevels(peak)[keepChr]
+  peakAnno <- annotatePeak(peak, tssRegion=c(-3000, 3000), 
+                         TxDb=txdb, annoDb="org.Dm.eg.db") 
+  peakAnno_df=as.data.frame(peakAnno)
+  sampleName=basename(strsplit(bedPeaksfile, '\\.')[[1]][1])
+  return(peakAnno_df)
+}
+tem=lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T),anno_bed)
+```
 
 
 
