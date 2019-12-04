@@ -346,7 +346,7 @@ bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907449.fastq.gz | samtool
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907450.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Ez_SppsKO_3.bam
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907451.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Ph_SppsKO_1.bam
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907452.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Ph_SppsKO_2.bam
-bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907423.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Ph_SppsKO_3.bam
+bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907453.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Ph_SppsKO_3.bam
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907454.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Pho_SppsKO_1.bam
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907455.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Pho_SppsKO_2.bam
 bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR5907456.fastq.gz | samtools sort -O bam -o Fly/ChIP_seq/Psc_SppsKO_1.bam
