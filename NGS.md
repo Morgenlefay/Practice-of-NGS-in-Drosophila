@@ -366,7 +366,7 @@ bowtie2 -t -p 8 -x Fly/Bowtie2_fly/fly -U Fly/Data/SRR9967698.fastq.gz | samtool
 ```
 #### Deduplicates
 ```bash
-
+ls Fly/ChIP_seq/*.bam |  while read id; do sambamba markdup -r $id $id.dedup.bam & done
 ```
 
 
