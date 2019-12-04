@@ -460,7 +460,23 @@ colnames(df2)=c("Location","Sample","Fraction")
 ggbarplot(df2, "Sample", "Fraction",
           fill = "Location", color = "Location", palette = "lancet")
 ```
-
+#### Venn
+```r
+rm(list=ls())
+library("ChIPseeker")
+library("org.Dm.eg.db")
+library("TxDb.Dmelanogaster.UCSC.dm3.ensGene")
+txdb <- TxDb.Dmelanogaster.UCSC.dm3.ensGene
+library("clusterProfiler")
+library("ChIPpeakAnno")
+library("stringr")
+BedFiles=list.files(path = 'Peak/',pattern = '*bed$',full.names = T)
+fs=lapply(BedFiles,readPeakFile)
+ol <- findOverlapsOfPeaks(fs[[1]],fs[[2]],fs[[3]])
+makeVennDiagram(ol,
+                NameOfPeaks = str_split(BedFiles,'_',simplify = T),
+                TxDb = txdb)
+```
 
 
 
