@@ -387,7 +387,15 @@ samtools merge Fly/ChIP_seq/Merge/Psc_SppsKO.bam Fly/ChIP_seq/Psc_SppsKO_1.bam.d
 samtools merge Fly/ChIP_seq/Merge/Psc_WT.bam Fly/ChIP_seq/Psc_WT_1.bam.dedup.bam Fly/ChIP_seq/Psc_WT_2.bam.dedup.bam
 samtools merge Fly/ChIP_seq/Merge/Spps_WT.bam Fly/ChIP_seq/Spps_WT_1.bam.dedup.bam Fly/ChIP_seq/Spps_WT_2.bam.dedup.bam
 ```
-
+#### Peak calling
+```bash
+macs2 callpeak -t Fly/ChIP_seq/Ez_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Ez_WT -q 0.01 --outdir Peak
+macs2 callpeak -t Fly/ChIP_seq/Pc_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Pc_WT -q 0.01 --outdir Peak
+macs2 callpeak -t Fly/ChIP_seq/Ph_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Ph_WT -q 0.01 --outdir Peak
+macs2 callpeak -t Fly/ChIP_seq/Pho_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Pho_WT -q 0.01 --outdir Peak
+macs2 callpeak -t Fly/ChIP_seq/Psc_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Psc_WT -q 0.01 --outdir Peak
+macs2 callpeak -t Fly/ChIP_seq/Spps_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -g dm -n Spps_WT -q 0.01 --outdir Peak
+```
 
 
 
