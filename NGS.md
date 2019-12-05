@@ -21,7 +21,7 @@ conda deactivate
 #### Build Index
 ```bash
 hisat2-build Fly/Drosophila.fa Fly/Hisat2_fly/fly
-bowtie2-build Fly/Drosophila.fa Fly/Bowtie2_fly/fly
+bowtie2-build Fly/dm6.fa Fly/Bowtie2_fly/fly
 ```
 ## RNA-Seq
 #### Hisat2
