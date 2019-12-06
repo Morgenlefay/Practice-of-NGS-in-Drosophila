@@ -460,7 +460,7 @@ colnames(df2)=c("Location","Sample","Fraction")
 ggbarplot(df2, "Sample", "Fraction",
           fill = "Location", color = "Location", palette = "lancet")
 ```
-#### Venn
+##### Venn
 ```r
 rm(list=ls())
 library("ChIPseeker")
@@ -477,7 +477,27 @@ makeVennDiagram(ol,
                 NameOfPeaks = str_split(BedFiles,'_',simplify = T),
                 TxDb = txdb)
 ```
-
+##### Visualization
+```r
+rm(list=ls())
+library("ChIPseeker")
+library("org.Dm.eg.db")
+library("TxDb.Dmelanogaster.UCSC.dm6.ensGene")
+txdb <- TxDb.Dmelanogaster.UCSC.dm6.ensGene
+library("clusterProfiler")
+setwd("Peak")
+Ez<-readPeakFile("Ez_WT_peaks.narrowPeak")
+Pc<-readPeakFile("Pc_WT_peaks.narrowPeak")
+Ph<-readPeakFile("Ph_WT_peaks.narrowPeak")
+Pho<-readPeakFile("Pho_WT_peaks.narrowPeak")
+Psc<-readPeakFile("Psc_WT_peaks.narrowPeak")
+Spps<-readPeakFile("Spps_WT_peaks.narrowPeak")
+peaks <- list(Ez=Ez,Pc=Pc,Ph=Ph,Pho=Pho,Psc=Psc,Spps=Spps)
+promoter <- getPromoters(TxDb=txdb, upstream=3000, downstream=3000)
+tagMatrixList <- lapply(peaks, getTagMatrix, windows=promoter)
+plotAvgProf(tagMatrixList, xlim=c(-3000, 3000))
+tagHeatmap(tagMatrixList, xlim=c(-3000, 3000), color=NULL)
+```
 
 
 
