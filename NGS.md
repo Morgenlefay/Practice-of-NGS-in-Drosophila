@@ -402,8 +402,8 @@ macs2 callpeak -t Fly/ChIP_seq/Spps_WT.bam -c Fly/ChIP_seq/Input_WT.bam -f BAM -
 rm(list=ls())
 library("ChIPseeker")
 library("org.Dm.eg.db")
-library("TxDb.Dmelanogaster.UCSC.dm3.ensGene")
-txdb <- TxDb.Dmelanogaster.UCSC.dm3.ensGene
+library("TxDb.Dmelanogaster.UCSC.dm6.ensGene")
+txdb <- TxDb.Dmelanogaster.UCSC.dm6.ensGene
 library("clusterProfiler")
 anno_bed <- function(bedPeaksfile){peak<-readPeakFile(bedPeaksfile)
   #keepChr= !grepl("Het",seqlevels(peak))
@@ -422,8 +422,8 @@ tmp=lapply(list.files(path = 'Peak/',pattern = 'WT',full.names = T),anno_bed)
 rm(list=ls())
 library("ChIPseeker")
 library("org.Dm.eg.db")
-library("TxDb.Dmelanogaster.UCSC.dm3.ensGene")
-txdb <- TxDb.Dmelanogaster.UCSC.dm3.ensGene
+library("TxDb.Dmelanogaster.UCSC.dm6.ensGene")
+txdb <- TxDb.Dmelanogaster.UCSC.dm6.ensGene
 library("clusterProfiler")
 anno_bed <- function(bedPeaksfile){peak<-readPeakFile(bedPeaksfile)
 #keepChr= !grepl("Het",seqlevels(peak))
@@ -465,8 +465,8 @@ ggbarplot(df2, "Sample", "Fraction",
 rm(list=ls())
 library("ChIPseeker")
 library("org.Dm.eg.db")
-library("TxDb.Dmelanogaster.UCSC.dm3.ensGene")
-txdb <- TxDb.Dmelanogaster.UCSC.dm3.ensGene
+library("TxDb.Dmelanogaster.UCSC.dm6.ensGene")
+txdb <- TxDb.Dmelanogaster.UCSC.dm6.ensGene
 library("clusterProfiler")
 library("ChIPpeakAnno")
 library("stringr")
